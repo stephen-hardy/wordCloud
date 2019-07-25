@@ -1,7 +1,7 @@
-@font-face { font-family: Proxima; font-display: swap; font-weight: 300; src: url("proximaNova/light.otf") format("truetype"); }
-@font-face { font-family: Proxima; font-display: swap; font-weight: normal; src: url("proximaNova/normal.otf") format("truetype"); }
-@font-face { font-family: Proxima; font-display: swap; font-weight: 600; src: url("proximaNova/semibold.otf") format("truetype"); }
-@font-face { font-family: Proxima; font-display: swap; font-weight: bold; src: url("proximaNova/bold.otf") format("truetype"); }
+@font-face { font-family: Proxima; font-display: swap; font-weight: 300; src: url("ProximaNova/light.otf") format("truetype"); }
+@font-face { font-family: Proxima; font-display: swap; font-weight: normal; src: url("ProximaNova/normal.otf") format("truetype"); }
+@font-face { font-family: Proxima; font-display: swap; font-weight: 600; src: url("ProximaNova/semibold.otf") format("truetype"); }
+@font-face { font-family: Proxima; font-display: swap; font-weight: bold; src: url("ProximaNova/bold.otf") format("truetype"); }
 body { padding: 0; margin: 0; text-align: center; font-family: Proxima; }
 [hidden] { display: none !important; }
 #Stats { height: 8vh; padding-top: 3vh; box-sizing: border-box; }
