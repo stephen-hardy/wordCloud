@@ -1,7 +1,8 @@
-@font-face { font-family: Proxima; font-display: swap; font-weight: 300; src: url("proximaNova/light.otf") format("truetype"); }
-@font-face { font-family: Proxima; font-display: swap; font-weight: normal; src: url("proximaNova/normal.otf") format("truetype"); }
-@font-face { font-family: Proxima; font-display: swap; font-weight: 600; src: url("proximaNova/semibold.otf") format("truetype"); }
-@font-face { font-family: Proxima; font-display: swap; font-weight: bold; src: url("proximaNova/bold.otf") format("truetype"); }
+@font-face{font-family:Proxima;font-style:normal;font-display:swap;font-weight:400;src:url(https://www.rationalconsulting.com/static/ProximaNova-Regular.6d023c85.woff2) format("woff2"),url(https://www.rationalconsulting.com/static/ProximaNova-Regular.1a1ab341.woff) format("woff")}
+@font-face{font-family:Proxima;font-style:italic;font-display:swap;font-weight:400;src:url(https://www.rationalconsulting.com/static/ProximaNova-RegularIt.483f7fd6.woff2) format("woff2"),url(https://www.rationalconsulting.com/static/ProximaNova-RegularIt.9c719652.woff) format("woff")}
+@font-face{font-family:Proxima;font-style:normal;font-display:swap;font-weight:600;src:url(https://www.rationalconsulting.com/static/ProximaNova-Semibold.795b2bc3.woff2) format("woff2"),url(https://www.rationalconsulting.com/static/ProximaNova-Semibold.f7b7cf1d.woff) format("woff")}
+@font-face{font-family:Proxima;font-style:normal;font-display:swap;font-weight:700;src:url(https://www.rationalconsulting.com/static/ProximaNova-Bold.fc8e6ef6.woff2) format("woff2"),url(https://www.rationalconsulting.com/static/ProximaNova-Bold.4a5a8333.woff) format("woff")}
+@font-face{font-family:Proxima;font-style:italic;font-display:swap;font-weight:700;src:url(https://www.rationalconsulting.com/static/ProximaNova-BoldIt.2b72a354.woff2) format("woff2"),url(https://www.rationalconsulting.com/static/ProximaNova-BoldIt.58543880.woff) format("woff")}
 body { padding: 0; margin: 0; text-align: center; font-family: Proxima; }
 [hidden] { display: none !important; }
 #Stats { height: 8vh; padding-top: 3vh; box-sizing: border-box; }
