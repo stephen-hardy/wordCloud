@@ -23,13 +23,8 @@ const w = 1000, h = 1000, cld = d3.layout.cloud(), q = document.getElementById('
 	}
 	window.sms = sms;
 	async function getPoll() {
-		const t = await (await fetch('https://prod-21.westcentralus.logic.azure.com/workflows/28b63b907d0d492c91d9fde2218f6aab/triggers/manual/paths/invoke/' + time.toISOString() + '?api-version=2016-06-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=4N_NRkHJsn_S6sbAIUh1n9jilo36u9zgqg4v5CAsKRw')).text(); // eslint-disable-line max-len
-		if (t) {
-			document.getElementById('Logo').hidden = true;
-			document.getElementById('Cloud').removeAttribute('hidden');
-			if (t !== last) { last = t; parseText(last); }
-		}
-		setTimeout(getPoll, 3000);
+		parseText(await (await fetch('https://prod-21.westcentralus.logic.azure.com/workflows/28b63b907d0d492c91d9fde2218f6aab/triggers/manual/paths/invoke/' + time.toISOString() + '?api-version=2016-06-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=4N_NRkHJsn_S6sbAIUh1n9jilo36u9zgqg4v5CAsKRw')).text()); // eslint-disable-line max-len
+		setTimeout(getPoll, 2000);
 	}
 window.addEventListener('hashchange', _ => {
 	q.value = decodeURI(location.hash || '#').slice(1);
@@ -44,6 +39,10 @@ document.getElementById('Cloud').addEventListener('dblclick', evt => {
 	a.click();
 });
 function parseText(txt) {
+	if (txt === last) { return; } // no need to refresh word cloud SVG if the inputs haven't changed
+	last = txt;
+	document.getElementById('Logo').hidden = !!txt; // hide logo/qr when words were parsed
+	document.getElementById('Cloud')[txt ? 'removeAttribute' : 'setAttribute']('hidden', ''); // hide cloud SVG when no words were parsed
 	let tags = {}; const e = {}, words = txt.split(/\s+/).filter(Boolean);
 	words.forEach(t => {
 		const lower = t.toLowerCase();
