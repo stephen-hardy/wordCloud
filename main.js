@@ -1,17 +1,15 @@
 /* global d3: false */
 // https://www.jasondavies.com/wordcloud/
 // https://github.com/jasondavies/d3-cloud
-let fontSize, last, id;
+let fontSize, last;
 const w = 1000, h = 1000, cld = d3.layout.cloud(),
+	url = 'https://prod-21.westcentralus.logic.azure.com/workflows/28b63b907d0d492c91d9fde2218f6aab/triggers/manual/paths/invoke/' + new Date().toISOString() + '?api-version=2016-06-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=4N_NRkHJsn_S6sbAIUh1n9jilo36u9zgqg4v5CAsKRw', // eslint-disable-line max-len
 	svg = d3.select('#Cloud'), anim = svg.append('g'), vis = svg.append('g').attr('transform', `translate(${[w / 2, h / 2]})`);
 { // poll setup
 	const q = document.getElementById('Question'), hash = decodeURI(location.hash || '#').slice(1);
 	q.addEventListener('change', evt => (location.hash = encodeURI(evt.target.value)));
 	q.value = hash;
 	setTimeout(getPoll, 5000);
-	fetch('https://prod-16.westcentralus.logic.azure.com:443/workflows/8e4454b190454188ad41acff5cbb183e/triggers/manual/paths/invoke?api-version=2016-06-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=KxY5Ue8EK9J_-IYn1lfCTYsziYYjHrjh2y5Ip-aSZOU', // eslint-disable-line max-len
-		{ method: 'POST', body: hash }
-	).then(r => r.text()).then(t => (id = t));
 }
 { // cloud setup
 	const angles = 2, linScale = d3.scale.linear();
@@ -21,18 +19,18 @@ const w = 1000, h = 1000, cld = d3.layout.cloud(),
 }
 // Poll - create, pull, push (fake sms)
 	function sms(txt) {
-		return fetch('https://prod-15.westcentralus.logic.azure.com:443/workflows/60bd40467af24538a665fd9c1e0368af/triggers/manual/paths/invoke?api-version=2016-06-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=2XhBVPKXvH-uOCbTSM2SHrzx2anCR57iLaammigLEdE', // eslint-disable-line max-len
+		return fetch('https://prod-31.westcentralus.logic.azure.com:443/workflows/550447cbd013422a9d5da2043d97cc2a/triggers/manual/paths/invoke?api-version=2016-06-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=bX4hxretdBK4bNDkcyZdCd5aVAmN1XbNvZMojC4IazU', // eslint-disable-line max-len
 			{ method: 'POST', body: 'Body=' + txt, headers: { 'Content-Type': 'application/x-www-form-urlencoded' } });
 	}
 	window.sms = sms;
 	async function getPoll() {
-		const t = await (await fetch(`https://prod-21.westcentralus.logic.azure.com/workflows/0735bfc80a494a7e8ac7d2ec40932989/triggers/manual/paths/invoke/${id}?api-version=2016-06-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=w4BeiaJAgah2iFFApJlJKliCk_WjeNNwjG8lv9RXABY`)).text(); // eslint-disable-line max-len
+		const t = await (await fetch(url)).text();
 		if (t) {
 			document.getElementById('Logo').hidden = true;
 			document.getElementById('Cloud').removeAttribute('hidden');
 			if (t !== last) { last = t; parseText(last); }
 		}
-		setTimeout(getPoll, 5000);
+		setTimeout(getPoll, 3000);
 	}
 function parseText(txt) {
 	let tags = {}; const e = {}, words = txt.split(/\s+/).filter(Boolean);
