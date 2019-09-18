@@ -1,12 +1,11 @@
 /* global d3: false */
 // https://www.jasondavies.com/wordcloud/
 // https://github.com/jasondavies/d3-cloud
-let fontSize, last;
-const w = 1000, h = 1000, cld = d3.layout.cloud(),
-	url = 'https://prod-21.westcentralus.logic.azure.com/workflows/28b63b907d0d492c91d9fde2218f6aab/triggers/manual/paths/invoke/' + new Date().toISOString() + '?api-version=2016-06-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=4N_NRkHJsn_S6sbAIUh1n9jilo36u9zgqg4v5CAsKRw', // eslint-disable-line max-len
+let fontSize, last, time = new Date();
+const w = 1000, h = 1000, cld = d3.layout.cloud(), q = document.getElementById('Question'),
 	svg = d3.select('#Cloud'), anim = svg.append('g'), vis = svg.append('g').attr('transform', `translate(${[w / 2, h / 2]})`);
 { // poll setup
-	const q = document.getElementById('Question'), hash = decodeURI(location.hash || '#').slice(1);
+	const hash = decodeURI(location.hash || '#').slice(1);
 	q.addEventListener('change', evt => (location.hash = encodeURI(evt.target.value)));
 	q.value = hash;
 	setTimeout(getPoll, 5000);
@@ -24,7 +23,7 @@ const w = 1000, h = 1000, cld = d3.layout.cloud(),
 	}
 	window.sms = sms;
 	async function getPoll() {
-		const t = await (await fetch(url)).text();
+		const t = await (await fetch('https://prod-21.westcentralus.logic.azure.com/workflows/28b63b907d0d492c91d9fde2218f6aab/triggers/manual/paths/invoke/' + time.toISOString() + '?api-version=2016-06-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=4N_NRkHJsn_S6sbAIUh1n9jilo36u9zgqg4v5CAsKRw')).text(); // eslint-disable-line max-len
 		if (t) {
 			document.getElementById('Logo').hidden = true;
 			document.getElementById('Cloud').removeAttribute('hidden');
@@ -32,6 +31,18 @@ const w = 1000, h = 1000, cld = d3.layout.cloud(),
 		}
 		setTimeout(getPoll, 3000);
 	}
+window.addEventListener('hashchange', _ => {
+	q.value = decodeURI(location.hash || '#').slice(1);
+	time = new Date();
+	parseText('');
+});
+document.getElementById('Cloud').addEventListener('dblclick', evt => {
+	const a = document.createElement('a');
+	a.setAttribute('href', 'data:image/svg+xml;base64,'
+		+ window.btoa('<svg xmlns="http://www.w3.org/2000/svg"' + evt.currentTarget.outerHTML.slice(28)));
+	a.setAttribute('download', 'wordCloud.svg');
+	a.click();
+});
 function parseText(txt) {
 	let tags = {}; const e = {}, words = txt.split(/\s+/).filter(Boolean);
 	words.forEach(t => {
