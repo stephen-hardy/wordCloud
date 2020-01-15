@@ -1,0 +1,5 @@
+body { padding: 0; margin: 5vh 5vw; font-family: sans-serif; }
+header { font-size: 30px; margin: 5vmin 0; text-align: center; }
+#Questions { padding: 0; }
+	#Questions:empty::before { content: 'No questions have been submitted since page load'; display: block; text-align: center; }
+li { margin-bottom: 10px; }

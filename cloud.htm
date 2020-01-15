@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta name="format-detection" content="telephone=no">
+		<!-- Boilerplate: https://rationalinteraction.sharepoint.com/sites/dev/SL/boilerplate.aspx -->
+			<noscript><meta http-equiv="refresh" content="0; url=https://www.enable-javascript.com" /></noscript>
+			<meta id="lvl-viewport" name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no, viewport-fit=cover">
+			<title>Word Cloud</title><meta name="Description" content="Rational's realtime word cloud feedback tool">
+		<!-- CSS - cloud.css -->
+			<link href="cloud.css" rel="stylesheet">
+	</head>
+	<body>
+		<div id="Stats"></div>
+		<img id="Logo" class="main" src="qr.svg">
+		<svg id="Cloud" class="main" viewbox="0 0 1000 1000" hidden></svg>
+		<div>
+			<input id="Question">
+			<div id="Directive">Text one-word thoughts to:</div>
+			<div id="Number">812-770-4444</div>
+		</div>
+		<script src="d3.min.js"></script>
+		<script src="d3.layout.cloud.js"></script>
+		<script src="cloud.js"></script>
+		<script nomodule>
+			alert('Internet Explorer 11 is ' + ((Date.now() - 1381993200000) / 31536000000).toFixed(1) + ' years old, and unsupported.\nYou will now be prompted to open this application in Edge.');
+			window.open('microsoft-edge:' + location.href);
+			document.body.innerHTML = '<div style="background: red; color: yellow; text-align: center; padding: 40px; font: 40px sans-serif">PLEASE CLOSE THIS WINDOW</div>';
+		</script>
+	</body>
+</html>
