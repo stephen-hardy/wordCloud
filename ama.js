@@ -1,5 +1,6 @@
 
-let last = new Date(); const out = document.getElementById('Questions');
+const out = document.getElementById('Questions'), qs = [],
+	pollURL = 'https://prod-21.westcentralus.logic.azure.com/workflows/28b63b907d0d492c91d9fde2218f6aab/triggers/manual/paths/invoke/' + new Date().toISOString() + '?api-version=2016-06-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=4N_NRkHJsn_S6sbAIUh1n9jilo36u9zgqg4v5CAsKRw'; // eslint-disable-line max-len
 setTimeout(poll, 5000);
 // Poll - create, pull, push (fake sms)
 	function sms(txt) {
@@ -8,9 +9,8 @@ setTimeout(poll, 5000);
 	}
 	window.sms = sms;
 	async function poll() {
-		const now = new Date();
-		(await (await fetch('https://prod-21.westcentralus.logic.azure.com/workflows/28b63b907d0d492c91d9fde2218f6aab/triggers/manual/paths/invoke/' + last.toISOString() + '?api-version=2016-06-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=4N_NRkHJsn_S6sbAIUh1n9jilo36u9zgqg4v5CAsKRw')).json()) // eslint-disable-line max-len
-			.forEach(q => out.insertAdjacentHTML('beforeend', `<li>${q}</li>`));
-		last = now;
+		qs.push(...(await (await fetch(pollURL)).json())
+			.filter(q => !qs.includes(q))
+			.forEach(q => out.insertAdjacentHTML('beforeend', `<li>${q}</li>`)));
 		setTimeout(poll, 2000);
 	}
