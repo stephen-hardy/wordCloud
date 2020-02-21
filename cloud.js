@@ -1,7 +1,7 @@
 /* global d3: false */
 // https://www.jasondavies.com/wordcloud/
 // https://github.com/jasondavies/d3-cloud
-let fontSize, last, time = new Date();
+let fontSize, last, lastPoll = new Date();
 const w = 1000, h = 1000, cld = d3.layout.cloud(), q = document.getElementById('Question'),
 	svg = d3.select('#Cloud'), anim = svg.append('g'), vis = svg.append('g').attr('transform', `translate(${[w / 2, h / 2]})`);
 { // poll setup
@@ -18,17 +18,17 @@ const w = 1000, h = 1000, cld = d3.layout.cloud(), q = document.getElementById('
 }
 // Poll - create, pull, push (fake sms)
 	function sms(txt) {
-		return fetch('https://prod-31.westcentralus.logic.azure.com:443/workflows/550447cbd013422a9d5da2043d97cc2a/triggers/manual/paths/invoke?api-version=2016-06-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=bX4hxretdBK4bNDkcyZdCd5aVAmN1XbNvZMojC4IazU', // eslint-disable-line max-len
+		return fetch('https://prod-27.westus.logic.azure.com:443/workflows/454efec86a2646c7b5844cffe7f9092e/triggers/manual/paths/invoke?api-version=2016-06-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=tTGANvq07OwfvBc3kT85_sbtWqbK5-BTspawoRf-VgA', // eslint-disable-line max-len
 			{ method: 'POST', body: 'Body=' + txt, headers: { 'Content-Type': 'application/x-www-form-urlencoded' } });
 	}
 	window.sms = sms;
 	async function getPoll() {
-		parseText(await (await fetch('https://prod-21.westcentralus.logic.azure.com/workflows/28b63b907d0d492c91d9fde2218f6aab/triggers/manual/paths/invoke/' + time.toISOString() + '?api-version=2016-06-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=4N_NRkHJsn_S6sbAIUh1n9jilo36u9zgqg4v5CAsKRw')).json()); // eslint-disable-line max-len
+		parseText(await (await fetch('https://prod-79.westus.logic.azure.com/workflows/0fff45d9ef6b49a491180d0388eb8768/triggers/manual/paths/invoke/' + lastPoll.toISOString() + '?api-version=2016-06-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=Fwg8V0oF01LrKi5Mdvtj8KLJQcyZpZNvSgO80W8lnTs')).json()); // eslint-disable-line max-len
+		lastPoll = new Date();
 		setTimeout(getPoll, 2000);
 	}
 window.addEventListener('hashchange', _ => {
 	q.value = decodeURI(location.hash || '#').slice(1);
-	time = new Date();
 	parseText([]);
 });
 document.getElementById('Cloud').addEventListener('dblclick', evt => {
