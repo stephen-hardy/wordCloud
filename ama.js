@@ -9,8 +9,9 @@ setTimeout(poll, 5000);
 	}
 	window.sms = sms;
 	async function poll() {
-		const r = (await (await fetch(pollURL)).json()).filter(q => !qs.includes(q));
-		r.forEach(q => out.insertAdjacentHTML('beforeend', `<li>${q}</li>`));
-		qs.push(...r);
+		const r = (await (await fetch(pollURL)).json()),
+			words = r.words.filter(q => !qs.includes(q));
+		words.forEach(q => out.insertAdjacentHTML('beforeend', `<li>${q}</li>`));
+		qs.push(...words);
 		setTimeout(poll, 5000);
 	}
