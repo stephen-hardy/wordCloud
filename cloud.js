@@ -38,8 +38,8 @@ document.getElementById('Cloud').addEventListener('dblclick', evt => {
 	a.setAttribute('download', 'wordCloud.svg');
 	a.click();
 });
-function parseText(arr) {
-	const txt = arr.join(' ');
+function parseText(r) {
+	const txt = r.words.join(' ');
 	if (txt === last) { return; } // no need to refresh word cloud SVG if the inputs haven't changed
 	last = txt;
 	document.getElementById('Logo').hidden = !!txt; // hide logo/qr when words were parsed
