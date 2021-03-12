@@ -24,7 +24,7 @@ const w = 1000, h = 1000, cld = d3.layout.cloud(), q = document.getElementById('
 	window.sms = sms;
 	async function getPoll() {
 		parseText(await (await fetch('https://prod-79.westus.logic.azure.com/workflows/0fff45d9ef6b49a491180d0388eb8768/triggers/manual/paths/invoke/' + lastPoll.toISOString() + '?api-version=2016-06-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=Fwg8V0oF01LrKi5Mdvtj8KLJQcyZpZNvSgO80W8lnTs')).json()); // eslint-disable-line max-len
-		lastPoll = new Date();
+		// lastPoll = new Date();
 		setTimeout(getPoll, 2000);
 	}
 window.addEventListener('hashchange', _ => {
