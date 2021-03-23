@@ -1,0 +1,29 @@
+<style>
+	* { box-sizing: border-box; font-family: sans-serif; font-size: 20px; }
+	body { height: 100%; margin: 0; }
+	form { display: flex; flex-direction: column; align-items: center; height: 100%; padding: 20px; }
+	button, textarea { width: 100%; max-width: 480px; border-radius: 10px; border: 1px solid rgb(200 200 200); }
+	textarea {
+		flex-grow: 1; resize: none; margin-bottom: 10px; outline: none; padding: 20px;
+		box-shadow: 0px 0px 50px 0px rgb(0 0 0 / 20%);
+	}
+		textarea::placeholder { text-align: center; padding-top: 20vh; }
+		textarea:focus { border-color: rgb(0, 0, 150); }
+	button {
+		background-color: rgb(0, 0, 150); border: none; padding: 20px 0; cursor: pointer;
+		color: white; transition: 1s ease color;
+		box-shadow: 0px 0px 50px 0px rgb(0 0 0 / 20%), 0 0 10px 0 rgb(0 0 0 / 20%) inset
+	}
+		button:focus { outline: 1px solid currentColor; outline-offset: -10px; }
+		button:hover, button:focus { color: yellow; }
+</style>
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no, viewport-fit=cover">
+<form action="https://prod-61.westus.logic.azure.com:443/workflows/a4d19ebc9a5c4740b27a2d01fca57a95/triggers/manual/paths/invoke">
+	<textarea name="text" placeholder="Type your thoughts here, and submit below" autofocus></textarea>
+	<button title="Click here to submit your thoughts">Submit</button>
+
+	<input type="hidden" name="api-version" value="2016-06-01">
+	<input type="hidden" name="sp" value="/triggers/manual/run">
+	<input type="hidden" name="sv" value="1.0">
+	<input type="hidden" name="sig" value="Yz6U_-xKa1AbEv_4uwrQMSziod1MM1MIn8UnYhmrjIg">
+</form>
